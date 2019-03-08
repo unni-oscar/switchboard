@@ -1,7 +1,7 @@
 <template>
   <div class="animated fadeIn">
     <b-row>
-      <b-col sm="6" lg="3">
+      <!-- <b-col sm="6" lg="3">
         <b-card no-body class="bg-primary">
           <b-card-body class="pb-0">
             <b-dropdown class="float-right" variant="transparent p-0" right>
@@ -18,8 +18,8 @@
           </b-card-body>
           <card-line1-chart-example chartId="card-chart-01" class="chart-wrapper px-3" style="height:70px;" :height="70"/>
         </b-card>
-      </b-col>
-      <b-col sm="6" lg="3">
+      </b-col> -->
+      <!-- <b-col sm="6" lg="3">
         <b-card no-body class="bg-info">
           <b-card-body class="pb-0">
             <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
@@ -72,11 +72,11 @@
           </b-card-body>
           <card-bar-chart-example chartId="card-chart-04" class="chart-wrapper px-3" style="height:70px;" height="70"/>
         </b-card>
-      </b-col>
+      </b-col> -->
     </b-row>
 
-    <b-card>
-      <b-row>
+    <b-card>Under Contruction
+      <!-- <b-row>
         <b-col sm="5">
           <h4 id="traffic" class="card-title mb-0">Traffic</h4>
           <div class="small text-muted">November 2017</div>
@@ -91,9 +91,9 @@
             </b-form-radio-group>
           </b-button-toolbar>
         </b-col>
-      </b-row>
-      <main-chart-example chartId="main-chart-01" class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example>
-      <div slot="footer">
+      </b-row> -->
+      <!-- <main-chart-example chartId="main-chart-01" class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example> -->
+      <!-- <div slot="footer">
         <b-row class="text-center">
           <b-col class="mb-sm-2 mb-0">
             <div class="text-muted">Visits</div>
@@ -121,9 +121,9 @@
             <b-progress height={} class="progress-xs mt-2" :precision="1" :value="40"></b-progress>
           </b-col>
         </b-row>
-      </div>
+      </div> -->
     </b-card>
-    <b-row>
+    <!-- <b-row>
       <b-col sm="6" lg="3">
         <div class="brand-card">
           <div class="brand-card-header bg-facebook">
@@ -204,8 +204,8 @@
           </div>
         </div>
       </b-col>
-    </b-row>
-    <b-row>
+    </b-row> -->
+    <!-- <b-row>
       <b-col md="12">
         <b-card header="Traffic &amp; Sales">
           <b-row>
@@ -216,7 +216,6 @@
                     <small class="text-muted">New Clients</small><br>
                     <strong class="h4">9,123</strong>
                     <div class="chart-wrapper" :style="{ top: '-10px'}">
-                      <!--<callout-chart-example :data="[35, 23, 56, 22, 97, 23, 64]" variant="#20a8d8" width="80" height="30" />-->
                       <callout-chart-example chartId="callout-chart-01" :data="[35, 23, 56, 22, 97, 23, 64]" variant="info" width="80" height="30" />
                     </div>
                   </Callout>
@@ -444,7 +443,7 @@
           </b-table>
         </b-card>
       </b-col>
-    </b-row>
+    </b-row> -->
   </div>
 </template>
 

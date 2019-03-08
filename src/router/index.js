@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { TokenService } from '@/services/storage.service'
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer')
@@ -15,6 +16,7 @@ const Widgets = () => import('@/views/Widgets')
 
 // Views - Components
 const Cards = () => import('@/views/base/Cards')
+const Construction = () => import('@/views/base/Construction')
 const Forms = () => import('@/views/base/Forms')
 const Switches = () => import('@/views/base/Switches')
 const Tables = () => import('@/views/base/Tables')
@@ -52,7 +54,12 @@ const Modals = () => import('@/views/notifications/Modals')
 const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
 const Login = () => import('@/views/pages/Login')
+const ForgetPassword = () => import('@/views/pages/ResetPassword')
+const ChangePassword = () => import('@/views/users/ChangePassword')
+
+
 const Register = () => import('@/views/pages/Register')
+const Registration = () => import('@/views/users/Register')
 
 // Users
 const Users = () => import('@/views/users/Users')
@@ -60,8 +67,8 @@ const User = () => import('@/views/users/User')
 
 Vue.use(Router)
 
-export default new Router({
-  mode: 'hash', // https://router.vuejs.org/api/#mode
+export const router =  new Router({
+  mode: 'history', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
@@ -70,6 +77,7 @@ export default new Router({
       redirect: '/dashboard',
       name: 'Home',
       component: DefaultContainer,
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'dashboard',
@@ -123,11 +131,30 @@ export default new Router({
               name: 'User',
               component: User,
             },
+            
+          ]
+        },
+        {
+          path: 'user',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'change-password',
+              name: 'Change Password',
+              component: ChangePassword,
+            },
+            {
+              path: 'register',
+              name: 'Staff Registration',
+              component: Registration,
+            },
           ]
         },
         {
           path: 'base',
-          redirect: '/base/cards',
+          redirect: '/base/construction',
           name: 'Base',
           component: {
             render (c) { return c('router-view') }
@@ -137,6 +164,11 @@ export default new Router({
               path: 'cards',
               name: 'Cards',
               component: Cards
+            },
+            {
+              path: 'construction',
+              name: 'Construction',
+              component: Construction
             },
             {
               path: 'forms',
@@ -303,9 +335,44 @@ export default new Router({
       ]
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+      meta: { onlyWhenLoggedOut: true }
+    },
+    {
+      path: '/reset-password',
+      name: 'ResetPassword',
+      component: ForgetPassword,
+      meta: { onlyWhenLoggedOut: true }
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
+
+    // {
+    //   path: '/user',
+    //   redirect: '/user/change-password',
+    //   name: 'User',
+    //   meta: { requiresAuth: true },
+    //   component: {
+    //     render (c) { return c('router-view') }
+    //   },
+    //   children: [
+    //     {
+    //       path: 'change-password',
+    //       name: 'ChangePassword',
+    //       component: Construction
+    //     },
+    //   ]
+    // },
+    {
       path: '/pages',
       redirect: '/pages/404',
       name: 'Pages',
+      meta: { requiresAuth: true },
       component: {
         render (c) { return c('router-view') }
       },
@@ -320,17 +387,42 @@ export default new Router({
           name: 'Page500',
           component: Page500
         },
-        {
-          path: 'login',
-          name: 'Login',
-          component: Login
-        },
-        {
-          path: 'register',
-          name: 'Register',
-          component: Register
-        }
+        // {
+        //   path: 'login',
+        //   name: 'Login',
+        //   component: Login
+        // },
+        // {
+        //   path: 'register',
+        //   name: 'Register',
+        //   component: Register
+        // }
       ]
     }
   ]
 })
+
+/**
+ * Route checking for each request whether it requires user to be logged in or not
+ */
+router.beforeEach((to, from, next) => { 
+  const isPrivate = to.matched.some(record => record.meta.requiresAuth)
+  const onlyWhenLoggedOut = to.matched.some(record => record.meta.onlyWhenLoggedOut)
+  const loggedIn = TokenService.getToken()
+  
+  // const loggedIn = !!userToken.token
+  if (isPrivate && !loggedIn) {
+    return next({
+      path: '/login',
+      query: {redirect: to.fullPath}
+    })
+  }
+
+  // Do not allow user to visit login page or register page if they are logged in
+  if (loggedIn && onlyWhenLoggedOut) {
+    return next('/')
+  }
+
+  next()
+})
+

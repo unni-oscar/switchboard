@@ -3,17 +3,17 @@
     <AppHeader fixed>
       <SidebarToggler class="d-lg-none" display="md" mobile />
       <b-link class="navbar-brand" to="#">
-        <img class="navbar-brand-full" src="img/brand/logo.svg" width="89" height="25" alt="CoreUI Logo">
-        <img class="navbar-brand-minimized" src="img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
+        <img class="navbar-brand-full" src="/img/brand/logo-canyon.png" width="150" height="50" alt="Canyon-news">
+        <img class="navbar-brand-minimized" src="/img/brand/sygnet.svg" width="30" height="30" alt="CoreUI Logo">
       </b-link>
       <SidebarToggler class="d-md-down-none" display="lg" />
-      <b-navbar-nav class="d-md-down-none">
+      <!-- <b-navbar-nav class="d-md-down-none">
         <b-nav-item class="px-3" to="/dashboard">Dashboard</b-nav-item>
         <b-nav-item class="px-3" to="/users" exact>Users</b-nav-item>
         <b-nav-item class="px-3">Settings</b-nav-item>
-      </b-navbar-nav>
+      </b-navbar-nav> -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item class="d-md-down-none">
+        <!-- <b-nav-item class="d-md-down-none">
           <i class="icon-bell"></i>
           <b-badge pill variant="danger">5</b-badge>
         </b-nav-item>
@@ -22,10 +22,10 @@
         </b-nav-item>
         <b-nav-item class="d-md-down-none">
           <i class="icon-location-pin"></i>
-        </b-nav-item>
+        </b-nav-item> -->
         <DefaultHeaderDropdownAccnt/>
       </b-navbar-nav>
-      <AsideToggler class="d-none d-lg-block" />
+      <!-- <AsideToggler class="d-none d-lg-block" /> -->
       <!--<AsideToggler class="d-lg-none" mobile />-->
     </AppHeader>
     <div class="app-body">
@@ -50,12 +50,12 @@
     <TheFooter>
       <!--footer-->
       <div>
-        <a href="https://coreui.io">CoreUI</a>
-        <span class="ml-1">&copy; 2018 creativeLabs.</span>
+        <!-- <a href="https://coreui.io">CoreUI</a> -->
+        <span class="ml-1">&copy; 2019 canyon-news.com</span>
       </div>
       <div class="ml-auto">
-        <span class="mr-1">Powered by</span>
-        <a href="https://coreui.io">CoreUI for Vue</a>
+        <span class="mr-1">9701 Wilshire Boulevard, 10th Floor Beverly Hills, CA 90212</span>
+        <!-- <a href="https://coreui.io">CoreUI for Vue</a> -->
       </div>
     </TheFooter>
   </div>

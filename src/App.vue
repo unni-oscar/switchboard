@@ -3,8 +3,24 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'app'
+  name: 'app',
+  created(){
+    axios.interceptors.response.use(
+      response => response,
+      error => {
+        const {status, config} = error.response;
+        if (status === 401 && config && !config.__isRetryRequest ) {
+          this.$store.dispatch('auth/setError', { code : '1' , msg : 'Session timed out. Please login' })
+          this.$store.dispatch('auth/logout')
+          this.$router.replace('/login')
+        } 
+        return Promise.reject(error);
+      }
+    )
+  }
 }
 </script>
 
